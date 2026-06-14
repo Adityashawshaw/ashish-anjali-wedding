@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import heroImage from "./assets/hero.jpeg";
+import photo1 from "./assets/photo1.jpeg";
+import photo2 from "./assets/photo2.jpeg";
+import photo3 from "./assets/photo3.jpeg";
+import photo4 from "./assets/photo4.jpeg";
 
 function App() {
   const weddingDate = new Date("July 1, 2026 00:00:00").getTime();
