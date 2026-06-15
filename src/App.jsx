@@ -72,7 +72,8 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="footer">
-        <p>💛 With Love — Ashish & Anjali • 01.07.2026 💛</p>
+        <p className="footer-text">Ashish & Anjali</p>
+<p className="footer-date">01 · 07 · 2026</p>
       </footer>
     </div>
   );
