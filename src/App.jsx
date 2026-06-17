@@ -7,22 +7,17 @@ import photo3 from "./assets/photo3.jpeg";
 import photo4 from "./assets/photo4.jpeg";
 
 function Countdown() {
-  const weddingDate = new Date("2026-07-01T00:00:00");
-  const [timeLeft, setTimeLeft] = useState({});
+  const [time, setTime] = useState({ days: 16, hours: 0, minutes: 49, seconds: 40 });
 
   useEffect(() => {
     const timer = setInterval(() => {
+      const weddingDate = new Date("2026-07-01");
       const now = new Date();
       const diff = weddingDate - now;
-      if (diff <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        clearInterval(timer);
-        return;
-      }
-      setTimeLeft({
+      setTime({
         days: Math.floor(diff / (1000 * 60 * 60 * 24)),
         hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        minutes: Math.floor((diff / 1000 / 60) % 60),
         seconds: Math.floor((diff / 1000) % 60),
       });
     }, 1000);
@@ -31,22 +26,36 @@ function Countdown() {
 
   return (
     <div className="countdown">
-      {["days", "hours", "minutes", "seconds"].map((unit) => (
-        <div className="countdown-box" key={unit}>
-          <span className="countdown-num">{timeLeft[unit] ?? "00"}</span>
-          <span className="countdown-label">{unit.charAt(0).toUpperCase() + unit.slice(1)}</span>
-        </div>
-      ))}
+      <div className="countdown-box"><span className="countdown-num">{time.days}</span><span className="countdown-label">Days</span></div>
+      <div className="countdown-box"><span className="countdown-num">{time.hours}</span><span className="countdown-label">Hours</span></div>
+      <div className="countdown-box"><span className="countdown-num">{time.minutes}</span><span className="countdown-label">Minutes</span></div>
+      <div className="countdown-box"><span className="countdown-num">{time.seconds}</span><span className="countdown-label">Seconds</span></div>
     </div>
   );
 }
 
 export default function App() {
+  const [showEnvelope, setShowEnvelope] = useState(true);
   const photos = [photo1, photo2, photo3, photo4];
+
+  if (showEnvelope) {
+    return (
+      <div className="envelope-screen" onClick={() => setShowEnvelope(false)}>
+        <div className="envelope-wrap">
+          <div className="envelope-body">
+            <div className="envelope-flap" />
+            <p className="env-sneh">स्नेह निमंत्रण</p>
+            <p className="env-names">Ashish ❤️ Anjali</p>
+            <p className="env-date">01 · 07 · 2026</p>
+          </div>
+        </div>
+        <p className="tap-text">✨ Tap to Open ✨</p>
+      </div>
+    );
+  }
 
   return (
     <div className="app">
-      {/* HERO SECTION */}
       <section className="hero" style={{ backgroundImage: `url(${hero})` }}>
         <div className="hero-overlay" />
         <div className="hero-content">
@@ -58,7 +67,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* GALLERY SECTION */}
       <section className="gallery-section">
         <h2 className="gallery-title">Our Story</h2>
         <div className="gallery">
@@ -70,11 +78,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="footer">
         <p className="footer-text">Ashish & Anjali</p>
-<p className="footer-date">01 · 07 · 2026</p>
+        <p className="footer-date">01 · 07 · 2026</p>
       </footer>
     </div>
   );
-          }
+}
